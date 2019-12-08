@@ -1,0 +1,36 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10(style='text-align: center; margin:auto')
+                       
+                        
+                        form(action=`/admin/newsletter` method="POST" style=' min-width: 60%; margin:auto;margin-top: 20px;text-align:center;')
+                            h4(style='margin: 10px auto;') Newsletter messages
+                            if newsletter.length !== 0
+                                .form-group(style='max-width: 100%;')
+                                
+                                    textarea.form-control(placeholder="Message before subscribe" name="before")= newsletter[0].before
+                                .form-group(style='max-width: 100%;')
+                                    textarea.form-control(placeholder="Message after subscribe" name="after")= newsletter[0].after
+                            else
+                                .form-group(style='max-width: 100%;')
+                                    textarea.form-control(placeholder="Message before subscribe" name="before")
+                                .form-group(style='max-width: 100%;')
+                                    textarea.form-control(placeholder="Message after subscribe" name="after")
+
+                            .form-group
+                                input.form-control.btn.btn-primary(type="submit" value="Save" style='border: 1px solid silver;')
+
+                       
+                    
+
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')

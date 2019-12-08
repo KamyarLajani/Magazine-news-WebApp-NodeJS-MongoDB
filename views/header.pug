@@ -1,0 +1,120 @@
+head
+  
+  if path.match(/^\/cat/i)
+
+    - var newPath = path.replace('/cat/', '')
+    each cat in category
+      if cat.name == newPath
+        title= cat.name
+        meta(name='Description' content= `${info[0].description.substring(0, 150)}...`)
+        meta(name='robots' content='index,follow')
+        meta(name='keywords' content= `${cat.name}, ${info[0].keywords}`)
+        link(rel='icon' href= `${url}/images/${info[0].image}` type='image/x-icon')
+        meta(property='og:url' content= `${url}${path}`)
+        meta(property='og:type' content='website')
+        meta(property='og:title' content= `${cat.name}`)
+        meta(property='og:description' content= `${info[0].description.substring(0, 100)}...`)
+        meta(property='og:image' content= `${url}/images/${info[0].image}`)
+    each subcat in subCategory
+      if subcat.name == newPath
+        title= subcat.name
+        meta(name='Description' content= `${info[0].description.substring(0, 150)}...`)
+        meta(name='robots' content='index,follow')
+        meta(name='keywords' content= `${subcat.name}, ${info[0].keywords}`)
+        link(rel='icon' href= `${url}/images/${info[0].image}` type='image/x-icon')
+        meta(property='og:url' content= `${url}${path}`)
+        meta(property='og:type' content='website')
+        meta(property='og:title' content= `${subcat.name}`)
+        meta(property='og:description' content= `${info[0].description.substring(0, 100)}...`)
+        meta(property='og:image' content= `${url}/images/${info[0].image}`)
+
+  else if path.match(/^\/article/)
+    
+    - var newPath = path.replace('/article/', '')
+    each article in articles
+      if article.num == newPath
+        title= article.title
+        meta(name='Description' content= `${article.content.substring(0, 150)}...`)
+        meta(name='robots' content='index,nofollow')
+        meta(name='keywords' content= `${article.keywords}`)
+        link(rel='icon' href= `${url}/images/${info[0].image}` type='image/x-icon')
+        meta(property='og:url' content= `${url}${path}`)
+        meta(property='og:type' content='article')
+        meta(property='og:title' content= `${article.title}`)
+        meta(property='og:description' content= `${article.content.substring(0, 100)}...`)
+        meta(property='og:image' content= `${url}/uploads/${article.image}`)
+
+  else 
+    title= path
+    meta(name='Description' content= `${info[0].description.substring(0, 150)}...`)
+    meta(name='robots' content='index,follow')
+    meta(name='keywords' content= `${info[0].keywords}`)
+    link(rel='icon' href= `${url}/images/${info[0].image}` type='image/x-icon')
+    if path == 'Home'
+      meta(property='og:url' content= `${url}`)
+    else
+      meta(property='og:url' content= `${url}/${path}`)
+    meta(property='og:type' content='website')
+    meta(property='og:title' content= `${info[0].title}`)
+    meta(property='og:description' content= `${info[0].description.substring(0, 100)}...`)
+    meta(property='og:image' content= `${url}/images/${info[0].image}`)
+
+      
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(charset='utf-8')
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/icons/css/all.css')
+  link(rel='stylesheet' href='/css/styles.css')
+.container
+  header
+    .row.header
+      .col-4.mr-auto
+        a(href="/")
+          img.img-fluid(src= `/images/${info[0].image}` alt='logo')
+      .col-8
+        img.img-fluid.float-right(src='/images/banner.png' alt='banner')
+    .row.break-news
+      .col-md
+        h6
+          span.fa.fa-bolt
+          |  Breaking news:
+        each breakVal in breaknews
+            span.m-0.news= breakVal.title
+  .menu
+    span.fa.fa-bars.menu-open(onclick='obj.menu()')
+    span.fa.fa-times.menu-close(onclick='obj.menu()')
+  nav
+    .row
+      .col-md-11
+        ul
+          li
+            a(href='/') Home
+         
+          each val in category
+            - var subcat=0
+            each subCat in subCategory
+              if val._id == subCat.category_id
+                - subcat = 1
+                
+            if subcat == 1
+              li
+                span(onclick="obj.subCategory(this)")= ` ${val.name} ` 
+                  span.fa.fa-sort-down
+                .subcat
+                  ul
+                    each subCat in subCategory
+                      if val._id == subCat.category_id
+                        li
+                          a(href=`/cat/${subCat.name}`)= subCat.name
+
+            else 
+              li
+                a(href= `/cat/${val.name}`)= val.name 
+
+                
+     
+      .col-lg-1.ml-auto
+        form.search-form(action='/' method='GET')
+          span.fa.fa-search(onclick='searchClicked()')
+          span.fa.fa-times(onclick='searchClicked()')
+          input(type='text' name='search' placeholder='Search on something' autofocus='')

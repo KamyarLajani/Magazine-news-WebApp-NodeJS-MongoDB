@@ -1,0 +1,229 @@
+// header
+include ./header.pug
+
+.container
+  section.slider
+    .row
+      .col-md-4
+        each val, i in highlighted
+          if i < 2
+            each articleVal, i in articles
+              if articleVal._id == val.article_id 
+                a(href=`/article/${articleVal.num}`)
+                  .article
+                    each catVal, i in category
+                      each subcat, i in subCategory
+                        if articleVal.category_id == subcat._id
+                          p.category-label= subcat.name
+                      if articleVal.category_id == catVal._id
+                          p.category-label= catVal.name
+                    img.img-thumbnail(src= `/uploads/${articleVal.image}` alt='image')
+                    h5= `${articleVal.title.substring(0, 60)}...`
+                      p= `${new Date(articleVal.date).getDate()}, ${new Date(articleVal.date).getMonth()+1}, ${new Date(articleVal.date).getFullYear()} `
+                        span.fa.fa-clock
+      .col-md-4
+        .arrows
+          span.fa.fa-chevron-left(onclick='slider.previous()')
+          span.fa.fa-chevron-right(onclick='slider.next()')
+        
+        .article.main
+          each val, i in slideshow
+            if i === 1
+              .sliders.show
+                each articleVal, i in articles
+                  if articleVal._id == val.article_id
+                    each catVal, i in category
+                      each subcat, i in subCategory
+                        if articleVal.category_id == subcat._id
+                          p.category-label= subcat.name
+                      if articleVal.category_id == catVal._id
+                          p.category-label= catVal.name
+                    a(href= `/article/${articleVal.num}`)
+                      img.img-thumbnail(src=`./uploads/${articleVal.image}` alt='image')
+                      h5= `${articleVal.title.substring(0, 60)}...`
+                        p= `${new Date(articleVal.date).getDate()}, ${new Date(articleVal.date).getMonth()+1}, ${new Date(articleVal.date).getFullYear()} `
+                          span.fa.fa-clock
+            else
+              .sliders
+                each articleVal, i in articles
+                  if articleVal._id == val.article_id
+                    each catVal, i in category
+                      each subcat, i in subCategory
+                        if articleVal.category_id == subcat._id
+                          p.category-label= subcat.name
+                      if articleVal.category_id == catVal._id
+                        p.category-label= catVal.name
+                    a(href= `/article/${articleVal.num}`)
+                      img.img-thumbnail(src=`./uploads/${articleVal.image}` alt='image')
+                      h5= `${articleVal.title.substring(0, 60)}...`
+                        p= `${new Date(articleVal.date).getDate()}, ${new Date(articleVal.date).getMonth()+1}, ${new Date(articleVal.date).getFullYear()} `
+                          span.fa.fa-clock
+          
+          
+      .col-md-4
+        each val, i in highlighted
+          if i< 4 && i > 1
+            each articleVal, i in articles
+              if articleVal._id == val.article_id 
+                a(href=`/article/${articleVal.num}`)
+                  .article
+                    each catVal, i in category
+                      each subcat, i in subCategory
+                        if articleVal.category_id == subcat._id
+                          p.category-label= subcat.name
+                      if articleVal.category_id == catVal._id
+                        p.category-label= catVal.name
+                    img.img-thumbnail(src= `/uploads/${articleVal.image}` alt='image')
+                    h5= `${articleVal.title.substring(0, 60)}...`
+                      p= `${new Date(articleVal.date).getDate()}, ${new Date(articleVal.date).getMonth()+1}, ${new Date(articleVal.date).getFullYear()} `
+                        span.fa.fa-clock
+  section
+    .row
+      main.col-lg-8
+        .row.section-label
+          h5.col
+            | Latest posts
+          span.col-8
+        // new posts
+        section
+          .row
+            each val, i in articles
+              if i === 0
+                .col-lg-5.pr-0
+                  a(href= `/article/${val.num}`)
+                    .article.main.img-hover
+                      each catVal, i in category
+                        each subcat in subCategory
+                          if subcat._id == val.category_id
+                            p.category-label(style='left: 7px;top: 7px;')= subcat.name
+                        if catVal._id == val.category_id
+                          p.category-label(style='left: 7px;top: 7px;')= catVal.name
+                      img.img-fluid(src='/uploads/'+ val.image alt='image')
+                      h5(style='width: 100%;left:0px;bottom:-10px;')= val.title
+                        p= `${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                          span.fa.fa-clock
+            .col-lg-7
+                .row
+                  each val, i in articles
+                    if i <= 4 && i >= 1
+                      .col-lg-6.pr-0
+                        a(href= `/article/${val.num}`)
+                          .article.img-hover
+                            each catVal, i in category
+                              each subcat in subCategory
+                                if subcat._id == val.category_id
+                                  p.category-label(style='left: 7px;top: 7px;')= subcat.name
+                              if catVal._id == val.category_id
+                                p.category-label(style='left: 7px;top: 7px;')= catVal.name
+                            img(src= '/uploads/'+ val.image alt='image')
+                            h5(style='font-size: 15px; width: 100%;left:0px;bottom:-10px;')= `${val.title.substring(0, 60)}...`
+
+                              p= `${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                                span.fa.fa-clock
+                  
+          .row(style='margin-top: 10px;')
+            each val, i in articles
+              if i > 4 && i <= 7
+                .col-lg-4
+                  a(href= `/article/${val.num}`)
+                    .article.img-hover
+                      each catVal, i in category
+                        each subcat in subCategory
+                          if subcat._id == val.category_id
+                            p.category-label(style='left: 7px;top: 7px;')= subcat.name
+                        if catVal._id == val.category_id
+                          p.category-label(style='left: 7px;top: 7px;')= catVal.name
+                      img(src= '/uploads/'+ val.image alt='image')
+                      h5(style='font-size: 15px; width: 100%;left:0px;bottom:-10px;')= `${val.title.substring(0, 60)}...`
+                        p= `${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                          span.fa.fa-clock
+            
+        // most viewed
+        section
+          .row.section-label
+            h5.col
+              | Most viewed
+            span.col-8
+          .row
+            each val, i in mostViewed
+              .col-lg-6
+                a(href= `article/${val.num}`)
+                  .article-normal
+                    each catVal, i in category
+                      each subcat, i in subCategory
+                        if subcat._id == val.category_id
+                          p.category-label(style='left: 15px;')= subcat.name
+                      if catVal._id == val.category_id
+                        p.category-label(style='left: 15px;')= catVal.name
+                    img(src= `/uploads/${val.image}` alt='image')
+                    h5= `${val.title.substring(0, 60)}...`
+                      p= `${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                        span.fa.fa-clock
+            
+        // Videos
+        section
+          .row.section-label
+            h5.col
+              | Videos
+            span.col-8
+          .row
+            each video, i in videos
+              each article, i in articles
+                if video.article_id == article._id
+                  .col-lg-4
+                    a(href= `article/${article.num}`)
+                      .article.img-hover
+                        img(src= `/uploads/${article.image}` alt='image')
+                        span.fa.fa-play-circle.play-icon
+                        h5(style='font-size: 15px; width: 100%;left:0px;bottom:-10px;')= article.title
+                          p= `${new Date(article.date).getDate()}, ${new Date(article.date).getMonth()+1}, ${new Date(article.date).getFullYear()} `
+                            span.fa.fa-clock
+            
+        // two categories
+        section
+          .row
+            each cat, i in category
+              - var hasSubcat= 0
+              - var counter = 0
+              - var subcatObj= {}
+              - var n= 0
+              each subcat, j in subCategory
+                
+                if subcat.category_id == cat._id
+                  - hasSubcat = 1
+                  if n == 0
+                    - subcatObj = subCategory[j]
+                    - n++
+              if hasSubcat == 1
+                - counter++
+                if counter < 2
+                  .col-lg-6
+                    .row.section-label
+                      h5.col= subcatObj.name
+                      span.col-6
+                      - var n = 0
+                    each article, j in articles
+                      if article.category_id == subcatObj._id
+                        if n == 0
+                          a(href= `/article/${article.num}`)
+                            .article-normal.img-blur
+                              img(src= `/uploads/${article.image}` alt='image')
+                              h5= `${article.title.substring(0, 60)}...`
+                                p= `${new Date(article.date).getDate()}, ${new Date(article.date).getMonth()+1}, ${new Date(article.date).getFullYear()} `
+                                  span.fa.fa-clock
+                        else 
+                          a(href= `/article/${article.num}`)
+                            .article-horizontal.img-blur
+                              img(src= `/uploads/${article.image}` alt='image')
+                              h5= `${article.title.substring(0, 60)}...`
+                                p= `${new Date(article.date).getDate()}, ${new Date(article.date).getMonth()+1}, ${new Date(article.date).getFullYear()} `
+                                  span.fa.fa-clock
+                        -n++
+      // sidebar
+      include ./sidebar.pug
+
+ 
+  // footer
+  include ./footer.pug
+script(src='/scripts/script.js')
+script(src='/scripts/slideshow.js')

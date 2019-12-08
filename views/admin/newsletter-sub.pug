@@ -1,0 +1,103 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10
+                        div.deleteWindow
+                            h5 Are you sure to delete?
+                            div
+                                a(href="").btn.btn-primary Delete
+                                button(onclick='obj.deleteBtn(this)').btn.bg-white.float-right Cancel
+                    if emails !== undefined
+                       
+                        form(action=`/admin/newsletter-sub/page/${currentPage}` method="GET" class="form-inline" style='min-width: 60%; margin:auto;margin-top: 20px;text-align:center;')
+                            .form-group
+                                input.form-control(type="text" name="search" placeholder="Search for article by titile")
+                            .form-group
+                                input.form-control.btn.bg-white(type="submit" value="Search" style='border: 1px solid silver;')
+                        .table-responsive
+                            table.table.table-striped.table-hover(style='text-align: center; margin-top: 50px; width: 100%')
+                                tr
+                                    th N.
+                                    th Email
+                                    th Date
+                                    th Delete
+
+                                    if (currentPage > totalPages || currentPage < 1)  && emails.length !== 0
+                                        h5 Page number is not valid
+                                        
+                                    else
+                                        each val, i in emails
+                                            tr
+                                                td= (((currentPage*limit)-limit) + (i+1))
+                                                td= val.email
+                                                td= ` ${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()}`
+                                                td
+                                                    i(onclick='obj.deleteBtn(this,"newsletter-sub")' id=`${val._id}` style='cursor:pointer').fa.fa-trash-alt
+                                                    
+                    
+                    // pagination
+                    
+                    if totalPages > 2
+                        if currentPage > totalPages || currentPage < 1
+                            h5 Page number is not valid
+                            
+                        else
+
+                            div(class="pagenation")
+                                ul
+                                    
+                                    // displaying left arrow button
+                                    if currentPage > 5
+                                        li
+                                            a(href="/admin/newsletter-sub/page/1") <<
+                                    // for current pages that less than 3 
+                                    if currentPage < 3
+                                        // three left buttons
+                                        - for(var i = 1; i<=3; i++)
+                                            if i < totalPages 
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/newsletter-sub/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/newsletter-sub/page/${i}`)= i
+                                        // three right buttons
+                                        - for(var i = 4; i<6; i++)
+                                            if i < totalPages
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/newsletter-sub/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/newsletter-sub/page/${i}`)= i
+                                    else
+                                        // three left buttons
+                                        - for(var i = currentPage-2; i<=currentPage; i++)
+                                            if i <= totalPages 
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/newsletter-sub/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/newsletter-sub/page/${i}`)= i
+                                        // three right buttons
+                                        - for(var i = currentPage+1; i<=currentPage+3; i++)
+                                            if i <= totalPages
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/newsletter-sub/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/newsletter-sub/page/${i}`)= i
+                                    // displaying right arrow button
+                                    if currentPage+6 < totalPages
+                                        li
+                                            a(href=`/admin/newsletter-sub/page/${totalPages}`) >>
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')
+
+

@@ -1,0 +1,7 @@
+{"_id":{"$oid":"5dea084438071a083c26abb9"},"name":"News","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea085138071a083c26abba"},"name":"Life","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea086038071a083c26abbb"},"name":"Science","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea086938071a083c26abbc"},"name":"Technology","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea086f38071a083c26abbd"},"name":"Caltures","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea087538071a083c26abbe"},"name":"Sport","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea087938071a083c26abbf"},"name":"General","__v":{"$numberInt":"0"}}

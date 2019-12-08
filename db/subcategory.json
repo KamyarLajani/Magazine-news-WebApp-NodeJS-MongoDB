@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5dea089738071a083c26abc0"},"name":"Kurdistan","category_id":"5dea084438071a083c26abb9","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea08ad38071a083c26abc1"},"name":"Global","category_id":"5dea084438071a083c26abb9","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea095038071a083c26abc3"},"name":"Tennis","category_id":"5dea087538071a083c26abbe","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5dea095b38071a083c26abc4"},"name":"Football","category_id":"5dea087538071a083c26abbe","__v":{"$numberInt":"0"}}

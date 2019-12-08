@@ -1,0 +1,62 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10(style='text-align: center; margin:auto')
+                        div.deleteWindow
+                            h5 Are you sure to delete?
+                            div
+                                a(href="").btn.btn-primary Delete
+                                button(onclick='obj.deleteBtn(this)').btn.bg-white.float-right Cancel
+                        
+                        form(action=`/admin/videos` method="GET" class="form-inline" style=' min-width: 60%; margin:auto;margin-top: 20px;text-align:center;')
+                            .form-group
+                                input.form-control(type="text" name="search" placeholder="Search for article")
+                            .form-group
+                                input.form-control.btn.bg-white(type="submit" value="Search" style='border: 1px solid silver;')
+
+                        form(style= "width: 100%; margin:auto; margin-top: 20px;" action="/admin/videos", method="POST")
+                            h5 Select four articles
+                            .form-group
+                                select.form-control(name='videos' required multiple style="height: 500px;")
+                                    option(value="0") - Select Articles - 
+                                    if articlesQuery == undefined
+                                        - var yes
+                                        if videos.length !== 0
+                                            each article in articles
+                                                - yes = false;
+                                                each val in videos
+                                                    if article._id == val.article_id
+                                                        option(value=`${article._id}` selected style='padding:10px')= article.title
+                                                        - yes = true
+                                                   
+                                                if !yes
+                                                    option(value=`${article._id}` style='padding:10px')= article.title
+                                                   
+                                        else 
+                                            each article in articles
+                                                option(value=`${article._id}` style='padding:10px')= article.title
+
+                                    else
+                                        if videos.length !== 0
+                                            each val in videos
+                                                each query in articlesQuery
+                                                    if query._id == val.article_id
+                                                        option(value=`${query._id}` selected style='margin-bottom:10px;padding:5px')= query.title
+                                        each query in articlesQuery
+                                            each article in articles
+                                                if JSON.stringify(query._id) == JSON.stringify(article._id)
+                                                    option(value=`${query._id}` style='margin-bottom:10px;padding:5px')= query.title
+                            .form-group
+                                input.form-control(type="submit" value="Save" class="btn btn-primary")
+                    
+
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')

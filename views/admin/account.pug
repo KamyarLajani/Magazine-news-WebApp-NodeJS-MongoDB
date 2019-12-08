@@ -1,0 +1,47 @@
+
+include ./header
+
+.container
+ .row
+  include ./sidebar
+
+  .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+   main
+    .row
+     .col-lg-10(style='text-align: center; margin:auto')
+
+      if edit === undefined
+       form(action=`/admin/account` method="POST" style='width:100% margin:auto;margin-top: 20px;text-align:center;')
+        h4(style='margin: 10px auto;') Admin Account
+
+        .form-group
+         input.form-control(type='text' placeholder='Username' name='name' required value=`${admin[0].name}`)
+
+        .form-group
+         input.form-control(type='email' placeholder='Email address' name='email' required value=`${admin[0].email}`)
+
+        .form-group
+         a.form-control.btn.btn-primary(href="/admin/account/edit" style='border: 1px solid silver;') Edit Account
+
+      else
+       form(action=`/admin/account/edit` method="POST" style='width:100% margin:auto;margin-top: 20px;text-align:center;')
+        h4(style='margin: 10px auto;') Edit Account
+
+         .form-group
+          input.form-control(type='text' placeholder='Username' name='name' required value=`${admin[0].name}`)
+
+         .form-group
+          input.form-control(type='email' placeholder='Email address' name='email' required value=`${admin[0].email}`)
+
+         .form-group
+          input.form-control(type='password' placeholder='New Password' name='password1' required)
+
+         .form-group
+          input.form-control(type='password' placeholder='Re enter Password' name='password2' required)
+         if error
+          p= error
+         .form-group
+          input.form-control.btn.btn-primary(type="submit" value="Update" style='border: 1px solid silver;')
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')

@@ -1,0 +1,665 @@
+*{
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+body {
+    background-color: #E8E8E8;
+}
+
+.row {
+    margin: 0px;
+}
+
+.header {
+    background-color: white;
+    padding: 10px 0px;
+    margin-top: 5px;
+    
+}
+.header img {
+    max-height: 100px;
+}
+ 
+.break-news {
+    background-color: white;
+    margin-top: 7px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.break-news h6 {
+    display: inline;
+    line-height: 25px;
+    margin-right: 10px;
+}
+
+.break-news span.news {
+    color:#20887b;
+    display: none;
+    animation: breaknews 4s infinite;
+}
+
+
+@keyframes breaknews {
+    from {
+        color: #5cc5b7;
+    }
+    to {
+        color: #20887b;
+    
+    }
+}
+
+nav {
+    background-color: #564256;
+    margin-bottom: 20px;
+    height: 64px;
+    
+}
+nav div div > ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+nav div div >  ul > li {
+    list-style: none;
+    float: left;
+    position: relative;
+}
+
+nav div div > ul > li > a, nav div div > ul > li > span {
+    display: block;
+    padding: 20px 30px;
+    clear: both;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+nav div div  ul > li > a:hover, nav div div  ul > li > span:hover {
+    text-decoration: none;
+    background-color: #FC814A;
+    color: white;
+    transition: 0.1s;
+}
+
+.subcat {
+    position: absolute;
+    background-color: white;
+    padding: 5px;
+    width: 130%;
+    z-index: 11;
+    display: none;
+}
+
+
+.subcat ul li {
+    float: none;
+    display: block;
+    
+}
+.subcat ul li a {
+    display: block;
+    padding: 5px 5px;
+    width: 140px;
+    color: black;
+    text-align: left;
+}
+
+
+main, aside {
+    z-index: 1;
+}
+.search-form span {
+    font-size: 200%;
+    cursor: pointer;
+    color: black;
+    margin-top: 10px;
+    background-color: transparent;
+    border: none;
+    margin: 0px;
+    float: right;
+    outline: none;
+    margin-left: 10px;
+}
+
+.search-form {
+    margin: 0px;
+    height: 95%;
+    margin-top: 10px;
+    position: relative;
+    
+}
+
+.search-form input {
+    position: absolute;
+    padding: 10px;
+    outline: none;
+    border: none;
+    right: 50px;
+    visibility: hidden;
+    
+}
+
+
+
+ .article{
+    position: relative;
+    height: 170px;
+    margin-bottom: 10px;
+}
+
+ .article img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.article h5 {
+   width: 97%;
+   position: absolute;
+   background-color: black;
+   bottom: -3px;
+   opacity: 0.7;
+   left: 5px;
+   padding: 5px;
+   color: white;
+}
+
+.article h5 p {
+    font-size: 14px;
+    margin: 0px;
+    color: rgb(226, 121, 72);
+    margin-top: 5px;
+}
+
+
+.category-label {
+    position: absolute;
+    background-color: #097e78;
+    top: 15px;
+    left: 15px;
+    color: white;
+    padding: 3px 5px;
+    font-size: 14px;
+}
+a:hover .article h5, a:hover .main h5{
+    color: silver;
+}
+
+
+ .main{
+    height: 350px;
+}
+
+.section-label {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    padding: 0px;
+}
+
+
+.section-label span {
+    border-top: 1px solid #96939B;
+    align-self: center;
+    margin-left: 10px;
+    width: 100%;
+    
+    
+}
+
+.img-hover{
+    overflow: hidden;
+    
+}
+
+.img-hover img {
+    transition: 0.5s;
+}
+.img-hover:hover img {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.play-icon {
+    font-size: 30px;
+    position: absolute;
+    left: 43%;
+    top: 40%;
+    color: black;
+    opacity: 0.7;
+}
+
+.article-normal {
+    padding: 5px;
+    border: 1px solid white;
+    background-color: white;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.article-normal img {
+    width: 100%;
+    height: 200px;
+}
+
+.article-normal h5 {
+    padding: 5px;
+    color: black;
+    padding-bottom: 0px;
+}
+
+.article-normal:hover h5 {
+    color: gray;
+}
+
+.article-normal h5 p {
+    font-size: 16px;
+    padding-top: 5px;
+    color: #FC814A;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.article-normal .category-label {
+    left: 15px;
+    top: 15px;
+}
+
+
+.article-horizontal {
+    padding: 5px;
+    background-color: white;
+    overflow: auto;
+    margin-bottom: 10px;
+
+}
+
+.article-horizontal img {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+}
+
+.article-horizontal h5 {
+    font-size: 17px;
+    padding: 5px;
+    color: black;
+    margin-bottom: 0px;
+
+}
+.article-horizontal h5:hover {
+    color: gray;
+}
+
+.article-horizontal h5 p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #FC814A;
+    margin-bottom: 0px;
+}
+
+.img-blur img {
+    transition: 0.5s;
+}
+.img-blur:hover img {
+   filter: blur(8px);
+  -webkit-filter: blur(2px);
+  transition: 0.2s;
+}
+
+.subs-notif {
+    margin-top: 50px;
+    background-color: #564256;
+    text-align: center;
+    padding: 50px 10px;
+    color: white;
+    margin-bottom: 40px;
+    display: none;
+    
+}
+
+.sidebar-label {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.sidebar-label h5 {
+    padding: 10px;
+    background-color: #564256;
+    color: white;
+}
+
+
+.sidebar-categories {
+    padding: 10px;
+    overflow: auto;
+}
+.sidebar-categories a {
+    display: block;
+    margin-bottom: 10px;
+    overflow: auto;
+    border-bottom: 1px solid #dedede;
+    padding: 5px;
+
+}
+.sidebar-categories a:last-child {
+    border-bottom: 0px;
+    margin-bottom: 0px;
+}
+.sidebar-categories a:hover h5 {
+    color: #FC814A;
+    transition: 0.2s;
+}
+.sidebar-categories a h5 {
+    float: left;
+    color: #564256;
+}
+
+.sidebar-categories a span {
+    float: right;
+    padding: 5px 10px;
+    border-radius: 100%;
+    background-color: #564256;
+    color: white;
+}
+
+.sidebar-ads {
+    margin: 50px 0px;
+    height: 300px;
+    
+}
+
+.sidebar-ads img {
+    height: 100%;
+    width: 100%;
+}
+
+.newsletter {
+    background-color: #564256;
+    padding: 10px;
+    text-align: center;
+}
+
+.newsletter p {
+    color: white;
+}
+
+
+
+.newsletter input {
+    padding: 5px;
+    display: block;
+    margin: 20px auto;
+}
+
+aside {
+    background-color: #f5f4f4;
+}
+
+.footer {
+    border-top: 5px solid #fc814a;
+    background-color: #564256;
+    margin-top: 30px;
+    padding: 30px 10px 0px;
+}
+.footer-about {
+    border-right: 1px solid rgb(156, 155, 155);
+}
+.footer-about a {
+    display: block;
+    margin: 15px 0px;
+    color: #000000;
+}
+
+.footer-about p {
+    color: #000000;
+}
+
+.footer-about a:hover {
+    color: #242424;
+}
+.footer-social {
+    border-right: 1px solid rgb(156, 155, 155);
+    margin: auto;
+}
+.footer-social div {
+    margin: 50px auto;
+    text-align: center;
+    
+}
+.footer-social span {
+    font-size: 30px;
+    margin: 10px;
+    align-self: center;
+    padding: 5px;
+    background-color: #786a78;
+    color: #564256;
+}
+
+.footer-social span:hover {
+    color: #171417;
+}
+
+.popular-tags a {
+    float: left;
+    padding: 5px;
+    background-color: #786a78;
+    margin: 4px;
+    color: black;
+}
+.popular-tags a:hover {
+    background-color: #7c767c;
+}
+
+
+.post-result {
+    margin: 20px 0px;
+    background-color: white;
+    padding: 10px;
+    max-width: 46%;
+    transition: 0.1s;
+
+}
+.post-result img{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 10px;
+}
+.post-result div p  {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #FC814A;
+    margin-bottom: 0px;
+    float: left;
+}
+
+.post-result div p:last-child {
+    float: right;
+    padding: 3px;
+}
+
+.post-result button {
+    background-color: #564256;
+    color: white;
+    border: 1px solid #564256;
+}
+
+.post-result button:hover {
+    color: white;
+    background-color: #786a78;
+    border: 1px solid #786a78;
+}
+
+.post-result a h5, .post-result a > p {
+    color: black;
+}
+
+.post-result:hover img {
+    opacity: 0.8;
+    transition: 0.1s;
+}
+
+.post-result:hover h5 {
+    color: gray;
+}
+
+.full-article {
+    background-color: #ffffff;
+    overflow: auto;
+    padding: 10px;
+}
+.full-article div {
+    margin-bottom: 30px;
+}
+.full-article div p {
+    float: left;
+    margin: 0px 20px;
+    text-align: center;
+    border-bottom: 1px solid #FC814A;
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.full-article div > p:last-child {
+    float: right;
+}
+.full-article div {
+    overflow: auto;
+}
+.full-article img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 500px;
+    
+}
+
+.full-article > span {
+    display: block;
+    padding: 20px;
+    margin-top: 10px;
+}
+.full-article h4 {
+    padding: 5px 20px;
+}
+
+.menu {
+    font-size: 25px;
+}
+.menu span {
+    cursor: pointer;
+}
+
+.menu .menu-close, .menu .menu-open{
+    display: none;
+}
+
+
+.sliders {
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+.show {
+    visibility: visible;
+    transition: 0.5s;
+    opacity: 1;
+    
+}
+
+.arrows {
+    position: absolute;
+    z-index: 1;
+    font-size: 19px;
+    right: 25px;
+    top: 10px;
+    
+}
+.arrows span {
+    margin: 3px;
+    padding: 5px 8px;
+    background-color: rgb(226, 121, 72);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+    nav  {
+        padding: 5px 0px;
+        height: auto;
+    }
+    nav div div > ul > li {
+        float: none;
+    }
+
+    nav div div >  ul > li > a, nav div div >  ul > li > span {
+        width: 100%;
+        padding: 10 0px;
+    
+    }
+    .search-form {
+        position: static;
+    }
+
+    .search-form input {
+        position: static;
+       float: right;
+    }
+    .section-label h5 {
+        font-size: 16px;
+    }
+    .container {
+        max-width: 100%;
+    }
+
+    .footer-social, .footer-about {
+        border-right: none;
+    }
+
+    .post-result {
+        max-width: 100%;
+    }
+    .break-news h6 {
+        font-size: 13px;
+    }
+    .break-news a {
+        font-size: 13px;
+    }
+    nav {
+        display: none;
+    }
+    .menu .menu-open{
+        display: block;
+    }
+
+    .subcat {
+        position: relative;
+        width: 100%;
+    }
+
+    .subcat ul li a {
+        width: 100%;
+    }
+    .article {
+        max-width: 100%;
+    }
+    
+    
+}

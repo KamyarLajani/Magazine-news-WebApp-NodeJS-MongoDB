@@ -1,0 +1,55 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10
+                        div.deleteWindow
+                            h5 Are you sure to delete?
+                            div
+                                a(href="").btn.btn-primary Delete
+                                button(onclick='obj.deleteBtn(this)').btn.bg-white.float-right Cancel
+
+                    .table-responsive
+                        table.table.table-striped.table-hover(style='text-align: center; margin-top: 50px; min-width: 600px;')
+                            tr
+                                th N.
+                                th Title
+                                th Edit
+                                th Delete
+                            if breaknews !== undefined
+                                each val, i in breaknews
+                                    tr
+                                        td= i+1
+                                        td= val.title
+                                        td
+                                            a(href=`/admin/breaknews/edit/${val._id}`)
+                                                i.fa.fa-edit
+                                        td
+                                            i(onclick='obj.deleteBtn(this,"breaknews")' id=`${val._id}` style='cursor:pointer').fa.fa-trash-alt
+                    if edit != true    
+                        .col-md-8(style='margin: auto')
+                            form(action='/admin/breaknews/add' method='POST' style='text-align: center; width: 100%; margin-top: 20px;')
+                                h4 Add Breaking News
+                                .form-group
+                                    input.form-control(type='text' placeholder='Title' required='' name='title')
+                                .form-group
+                                    input.btn.btn-primary.form-control(type='submit' value='Add')
+                    else
+                        .col-md-8(style='margin: auto')
+                            form(action=`/admin/breaknews/edit/${editCollection[0]._id}` method='POST' style='text-align: center; width: 100%; margin-top: 20px;')
+                                h4 Edit Breaking News
+                                .form-group
+                                    input.form-control(type='text' placeholder='Title' name='title' required='' id= `${editCollection[0]._id}` value= `${editCollection[0].title}`)
+                                .form-group
+                                    input.btn.btn-primary.form-control(type='submit' value='Edit')
+                    
+                if error !== undefined
+                    h3(style='color:red;text-align:left')= error
+
+script(type='text/javascript' src='/scripts/admin/script.js')

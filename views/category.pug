@@ -1,0 +1,44 @@
+// header
+include ./header.pug
+
+.container
+    .row
+        main.col-lg-8
+            .row.justify-content-md-between
+                if articlesCat != undefined && articlesCat != ''
+                    each val, i in articlesCat
+                        .col-lg-6.post-result
+                            a(href= `/article/${val.num}`)
+                                h5= val.title
+                                img(src= `/uploads/${val.image}` alt='image')
+                                p= `${val.content.substring(0, 100)}...`
+                                button.btn.btn-sm Read More
+                                div
+                                    p= ` ${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                                        span.fa.fa-clock
+                                    p= ` ${val.views} `
+                                        span.fa.fa-eye
+                else if subCategoryQuery != undefined && subCategoryQuery != ''
+                    each val, i in subCategoryQuery
+                        .col-lg-6.post-result
+                            a(href= `/article/${val.num}`)
+                                h5= val.title
+                                img(src= `/uploads/${val.image}` alt='image')
+                                p= `${val.content}...`
+                                button.btn.btn-sm Read More
+                                div
+                                    p= ` ${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()} `
+                                        span.fa.fa-clock
+                                    p= ` ${val.views} `
+                                        span.fa.fa-eye
+                else
+                    h3(style='margin: auto; margin-top: 50px;') Sorry, no articles found
+
+        // sidebar
+        include ./sidebar.pug
+
+    
+        // footer
+        include ./footer.pug
+script(src='/scripts/script.js')
+script(src='/scripts/slideshow.js')

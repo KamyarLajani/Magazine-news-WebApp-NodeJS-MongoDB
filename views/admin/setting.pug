@@ -1,0 +1,78 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10(style='text-align: center; margin:auto')
+                       
+                        
+                        form(action=`/admin/sitesetting` method="POST" style='width:100% margin:auto;margin-top: 20px;text-align:center;' enctype="multipart/form-data")
+                            h4(style='margin: 10px auto;') About Us
+            
+                            if info.length !== 0
+                                .form-group
+                                    input.form-control(type='text' placeholder='Website Title' name='title' required value=`${info[0].title}`)
+                                .form-group
+                                    input.form-control(type='text' placeholder='Keywords,Separated by comma' name='keywords' required value=`${info[0].keywords}`)
+                                .form-group
+                                    div(style='text-align: left;')
+                                        input(type='file' name='image' onchange="obj.imageUpload(this)")
+                                        img(src=`/images/${info[0].image}` class= "imageShow" style="max-width: 200px; max-height: 200px;")
+                                .form-group
+                                    input.form-control(type='email' placeholder='Website Email address' name='email' required value=`${info[0].email}`)
+                                .form-group
+                                    input.form-control(type='password' placeholder='Email Password' name='password' required value=`${info[0].password}`)
+                                .form-group
+                                    input.form-control(type='text' placeholder='Phone number' name='phone' required value=`${info[0].phone}`)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Facebook Link' name='facebook' required value=`${info[0].facebook}`)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Twitter Link' name='twitter' required value=`${info[0].twitter}`)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Instagram Link' name='instagram' required value=`${info[0].instagram}`)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Youtube Link' name='youtube' required value=`${info[0].youtube}`)
+                                .form-group
+                                    textarea.form-control(name="description" minlength='20' maxlength='300' required placeholder='Description' style='min-height:100px;')= info[0].description
+                                
+                            else
+                                .form-group
+                                    input.form-control(type='text' placeholder='Website Title' name='title' required)
+                                .form-group
+                                    input.form-control(type='text' placeholder='Keywords,Separated by comma' name='keywords' required)
+                                .form-group
+                                    div(style='text-align: left;')
+                                        input(type='file' name='image' onchange="obj.imageUpload(this)" required)
+                                        img(src='' class= "imageShow" style="max-width: 200px; max-height: 200px;")
+                                .form-group
+                                    input.form-control(type='email' placeholder='Email address, used for sending emails to users' name='email' required)
+                                .form-group
+                                    input.form-control(type='password' placeholder='Email Password' name='password' required)
+                                .form-group
+                                    input.form-control(type='text' placeholder='Phone number' name='phone' required)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Facebook Link' name='facebook' required)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Twitter Link' name='twitter' required)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Instagram Link' name='instagram' required)
+                                .form-group
+                                    input.form-control(type='url' placeholder='Youtube Link' name='youtube' required)
+                                .form-group
+                                    textarea.form-control(name="description" minlength='20' maxlength='300' required placeholder='Description' style='min-height:100px;')
+
+                                    
+                            .form-group
+                                input.form-control.btn.btn-primary(type="submit" value="Save" style='border: 1px solid silver;')
+
+                       
+                    
+
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')

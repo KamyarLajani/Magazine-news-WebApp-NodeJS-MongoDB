@@ -1,0 +1,72 @@
+head
+    title Admin Login
+    link(rel='stylesheet' href='/css/bootstrap.min.css')
+
+.container
+    .row.justify-content-md-center
+        
+            .col-md-4.login(style='padding: 20px 10px 20px; border-radius:10px; background-color: #31316a; margin-top: 200px; width: 300px;')
+                h3(style='text-align:center; color: white;') Admin Login
+                
+                if forgot == undefined
+                    if verified
+                        
+                        form(action=`/admin/login/forgot?verifycode=${verifyCode}&reset=1` method="post")
+                            .form-group
+                                input.form-control(type="password" placeholder="New Password" name='password1' required autocomplement="off")
+                            .form-group
+                                input.form-control(type="password" placeholder="Re enter Password" name='password2' required autocomplement="off")
+                            if error
+                                p(style='color:white;')= error
+                            if success
+                                p(style='color:#74b874;')= success
+                            .form-group
+                                input.form-control(type="submit" value="Update")
+                    else
+                        form(action=`/admin/login` method="post")
+                            .form-group
+                                input.form-control(type="email" placeholder="Email" name='email' required autocomplement="off" autofocus)
+                            .form-group
+                                input.form-control(type="password" placeholder="Password" name='password' required autocomplement="off")
+                            .form-group
+                                input.form-control(type="submit" value="Log in")
+                            
+                            if login_errors
+                                p(style='color: white;')= login_errors
+                        
+                            p
+                                a(href="/admin/login/forgot") Forgotten Password?
+                else
+                    form(action='/admin/login/forgot' method="post")
+                        .form-group
+                            input.form-control(type="email" placeholder="Email" name='email' required autocomplement="off" autofocus)
+
+                        if error
+                            p(style='color:white;')= error
+                        if success
+                            p(style='color:#74b874;')= success
+                        .form-group
+                            input.form-control(type="submit" value="Verify")
+
+                
+                
+
+                    
+
+
+style.
+    *{
+        font-family: sans-serif;
+    }
+    body {
+        background-image: linear-gradient(#b2cab2, #76b076, #408440);
+    }
+    @media screen and (max-width: 600px){
+        .login {
+            width: 80% !important;
+            margin: 200px auto !important;
+        }
+    }
+                       
+                    
+

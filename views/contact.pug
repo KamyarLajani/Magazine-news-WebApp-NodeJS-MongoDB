@@ -1,0 +1,41 @@
+// header
+include ./header.pug
+
+.container
+ .row
+  main.col-lg-8
+    
+    
+    h5.result= result
+    h4(style='text-align: center; margin: 20px;') Contact Us
+    form.was-validated.contactForm(action='/ContactUs' method='POST')
+        .form-group
+          input.form-control(type='text' placeholder='Name' required='' name='name')
+          .invalid-feedback Please fill out Your Name.
+        .form-group
+          input.form-control(type='email' placeholder='Email address' required='' name='email')
+          .invalid-feedback Please fill out Email address.
+        .form-group
+          textarea.form-control(name='message' rows='7' placeholder='Your message' required='' minlength='40')
+          .invalid-feedback Please fill out Your message, with at least 40 characters.
+        div(id="g-recaptcha" data-sitekey="6LcQZMEUAAAAAN83vRqrEtnuhv1psc6eeyWnFNWF")
+      
+        input.btn.btn-primary(type='submit' value='Send' style='margin-top:10px')
+  
+  // sidebar
+  include ./sidebar.pug
+
+ 
+  // footer
+  include ./footer.pug
+
+script(type='text/javascript').
+  var onloadCallback = function() {
+  grecaptcha.render('g-recaptcha', {
+  'sitekey' : '6LcQZMEUAAAAAN83vRqrEtnuhv1psc6eeyWnFNWF'
+  });
+  };
+script(src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async='' defer='')
+
+script(src='/scripts/script.js')
+script(src='/scripts/slideshow.js')

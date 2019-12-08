@@ -1,0 +1,42 @@
+
+.col-md-3
+    aside
+        div
+            i.fa.fa-user
+            | #{` ${user.name} `}
+        ul
+            li
+                a(href='/admin/') Home
+            li
+                a(href='/admin/contacts')
+                    | Contacts 
+                    if contactsCount > 99
+                        span 99+
+                    
+                    else if contactsCount > 0
+                        span= contactsCount
+                        
+            li
+                a(href='/admin/breaknews') Breaking News
+            li
+                a(href='/admin/categories') Categories
+            li
+                a(href='/admin/subCategories') Sub Categories
+            li
+                a(href='/admin/articles/page/1') Articles
+            li
+                a(href='/admin/slideshow') Slideshow
+            li
+                a(href='/admin/highlight') Highlited Articles
+            li
+                a(href='/admin/popular') Popular Articles
+            li
+                a(href='/admin/videos') Videos Article
+            li
+                a(href='/admin/about') About Page
+            li
+                a(href='/admin/newsletter') Newsletter
+            li
+                a(href='/admin/newsletter-sub/page/1') Newsletter Subscribers
+            li
+                a(href='/admin/sitesetting') Site Setting and SEO

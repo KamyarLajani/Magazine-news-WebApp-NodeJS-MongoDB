@@ -1,0 +1,38 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10
+                        div.deleteWindow
+                            h5 Are you sure to delete?
+                            div
+                                a(href="").btn.btn-primary Delete
+                                button(onclick='obj.deleteBtn(this)').btn.bg-white.float-right Cancel
+
+                    .table-responsive
+                        table.table.table-striped.table-hover(style='text-align: center; margin-top: 50px; min-width: 600px;')
+                            tr
+                                th N.
+                                th Username
+                                th Email
+                                th Message
+                                th Delete
+                            each val, i in contacts
+                                tr
+                                    td= i+1
+                                    td= val.name
+                                    td= val.email
+                                    td= val.message
+                                    td
+                                        i(onclick='obj.deleteBtn(this, "contacts")' id=`${val._id}` style='cursor:pointer').fa.fa-trash-alt
+                    
+
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')

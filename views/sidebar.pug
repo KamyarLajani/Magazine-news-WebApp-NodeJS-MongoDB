@@ -1,0 +1,72 @@
+aside.col-lg-4
+        // popular posts
+        section
+          .sidebar-label
+            h5 Popular posts
+          each popularVal, i in popular
+            each artVal, i in articles
+              
+              if popularVal.article_id == artVal._id
+                a(href=`/article/${artVal.num}`)
+                  .article-horizontal.img-blur
+                    img(src=`/uploads/${artVal.image}` alt='image')
+                    h5= `${artVal.title.substring(0, 60)}...`
+                      p= `${new Date(artVal.date).getDate()}, ${new Date(artVal.date).getMonth()+1}, ${new Date(artVal.date).getFullYear()} `
+                        span.fa.fa-clock
+         
+        // Notification
+        section
+          .subs-notif
+            h4 Subscribe Notification
+            button.btn.bg-white(onclick='obj.webpush();') Subscribe
+        // categories
+        section.bg-white
+          .sidebar-label
+            h5 Categories
+          .sidebar-categories
+            - var n = 0
+            each cat, i in category
+              - var hasSubcat= 0
+              each subcat in subCategory
+                if cat._id == subcat.category_id
+                  - hasSubcat = 1
+              if hasSubcat == 0
+
+                each article in articles
+                  if article.category_id == cat._id
+                    - n++
+                a(href= `/cat/${cat.name}`)
+                  h5= cat.name
+                  span= n
+                - n= 0
+
+            - var n = 0
+            each subcat, j in subCategory
+              each article in articles
+                if article.category_id == subcat._id
+                  - n++
+              a(href= `/cat/${subcat.name}`)
+                h5= subcat.name
+                span= n
+              - n= 0
+          
+                
+                
+        // Ads
+        section
+          .sidebar-ads
+            img.img-fluid(src='/images/ads.PNG' alt='ads image')
+        // Newsletter
+        section
+          each val, i in newsletter
+            .sidebar-label
+              h5 Newsletter
+            .newsletter
+              p= val.before
+              div
+                input(type='email' name='email' required='' placeholder='Your email address')
+                button.btn.bg-white(onclick='obj.newsletterSub()') Subscribe
+        // Ads
+        section
+          .sidebar-ads
+            img.img-fluid(src='/images/ads.PNG' alt='ads image')

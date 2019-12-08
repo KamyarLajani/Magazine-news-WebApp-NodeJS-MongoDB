@@ -1,0 +1,28 @@
+// header
+include ./header.pug
+
+.container
+ .row
+  main.col-lg-8
+  
+    section
+        .full-article
+            h4= articleQuery[0].title
+            div
+                p= ` ${new Date(articleQuery[0].date).getDate()}, ${new Date(articleQuery[0].date).getMonth()+1}, ${new Date(articleQuery[0].date).getFullYear()} `
+                    span.fa.fa-clock
+                p
+                    span.fa.fa-eye= ` ${articleQuery[0].views} `
+            img.img-fluid.img-thumbnail(src=`/uploads/${articleQuery[0].image}` alt='image')
+
+            span!= articleQuery[0].content
+
+
+  // sidebar
+  include ./sidebar.pug
+
+ 
+  // footer
+  include ./footer.pug
+script(src='/scripts/script.js')
+script(src='/scripts/slideshow.js')

@@ -1,0 +1,45 @@
+section.footer
+    .row
+      .col-lg-4.footer-about
+        a(href='/AboutUs')
+          span.fa.fa-address-card
+          |  About
+        a(href='/ContactUs')
+          span.fa.fa-id-card-alt
+          |  Contact us
+        p
+          span.fa.fa-envelope-square
+          = ` ${info[0].email}`
+        p
+          span.fa.fa-phone 
+          = ` ${info[0].phone}`
+      .col-lg-4.footer-social
+        div
+            a(href= `${info[0].facebook}`)
+              span.fab.fa-facebook
+            a(href=`${info[0].twitter}`)
+              span.fab.fa-twitter
+            a(href=`${info[0].instagram}`)
+              span.fab.fa-instagram
+            a(href= `${info[0].youtube}`)
+              span.fab.fa-youtube
+      .col-lg-4.popular-tags
+        each cat in category
+          - var hasSubcat = 0
+          each subcat in subCategory
+            if subcat.category_id == cat._id
+              - hasSubcat = 1
+          if hasSubcat == 0
+            a(href= `/cat/${cat.name}`)= cat.name
+        each subcat in subCategory
+          a(href= `/cat/${subcat.name}`)= subcat.name
+    .row(style='padding: 20px;color:#000000;')
+
+      .col-md-6
+        a(href='/api' style='color: gray') API 
+        span.fas.fa-copyright
+        |  Copyright 2019, All rights reserved
+      .col-md-6(style='text-align: right;')
+        | Developed by 
+        a(href='https://www.instagram.com/kamyar_lajani' style='color: #e68052') Kamyar Lajani
+        

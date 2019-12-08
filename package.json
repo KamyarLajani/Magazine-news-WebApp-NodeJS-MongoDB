@@ -1,0 +1,36 @@
+{
+  "name": "magazine",
+  "version": "1.0.0",
+  "description": "Magazine news web app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
+  },
+  "author": "Kamyar Lajani",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.4",
+    "crypto": "^1.0.1",
+    "email-verifier": "^0.4.1",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.2.0",
+    "formidable": "^1.2.1",
+    "mongoose": "^5.7.7",
+    "mv": "^2.1.1",
+    "nodemailer": "^6.3.1",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4",
+    "request": "^2.88.0",
+    "web-push": "^3.4.1"
+  }
+}

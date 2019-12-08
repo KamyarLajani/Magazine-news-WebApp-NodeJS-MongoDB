@@ -1,0 +1,128 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-eye
+                            div
+                                h6 Average Article Views
+                                - var num = 0;
+                                if articles.length !== 0
+                                    for val, i in articles
+                                        - num+= val.views
+                                    p= Math.round(num/articles.length)
+                                else
+                                    p 0
+                                    
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-newspaper
+                            div
+                                h6 Total Articles
+                                p= articles.length
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-id-card-alt
+                            div
+                                h6 Total Contacts
+                                p= contacts
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-list-alt
+                            div
+                                h6 Total Categories
+                                p= categories.length + subcategories.length
+
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-newspaper
+                            div
+                                h6 Total Newsletter Subscribers
+                                p= newsletter
+                    .col-lg-4.lists
+                        .list
+                            span.fa.fa-bell
+                            div
+                                h6 Total Notification Subscribers
+                                p= webpush
+                            
+                .row(style='margin-top: 80px')
+                    .col-lg-6
+                        canvas(id="articleChart")
+                    .col-lg-6
+                        canvas(id="categoryChart")
+
+- var Categories = []
+each cat in categories
+    - Categories.push(cat.name)
+
+each subcat in subcategories
+    - Categories.push(subcat.name)
+
+- var numbers = [], n
+each cat in categories
+    - n= 0
+    each article in articles
+        if article.category_id == cat._id
+            - n++
+
+    - numbers.push(n)
+
+each subcat in subcategories
+    - n= 0
+    each article in articles
+        if article.category_id == subcat._id
+            - n++
+
+    - numbers.push(n)
+
+
+script(type='text/javascript' src='/scripts/admin/script.js')
+script(src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0')
+script.
+  var ctx = document.getElementById('articleChart').getContext('2d');
+  
+  var chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+  labels: !{JSON.stringify(dayName.reverse())},
+  datasets: [{
+  label: 'Avarage article visits in this week',
+  backgroundColor: '#c82f59',
+  borderColor: 'rgb(255, 99, 132)',
+  data: !{JSON.stringify(arrayAvarage.reverse())}
+  }]
+  }
+  });
+  var ctx = document.getElementById('categoryChart').getContext('2d');
+  var chart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+  labels: !{JSON.stringify(Categories)},
+  datasets: [{
+  label: 'Avarage article visits in this week',
+  backgroundColor: '#c82f59',
+  data: !{JSON.stringify(numbers)},
+  backgroundColor: [
+  '#ce762b',
+  '#e5e58d',
+  '#2f9ec8',
+  '#ad84e3',
+  '#2fc8ac',
+  '#c82f59',
+  'gray',
+  '#D54C87',
+  '#4D45C7',
+  '#45C7B6',
+  '#BAD54E'
+  ],
+  }]
+  }
+  });

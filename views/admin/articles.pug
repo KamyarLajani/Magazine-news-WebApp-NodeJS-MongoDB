@@ -1,0 +1,222 @@
+
+include ./header
+
+.container
+    .row
+        include ./sidebar
+
+        .col-md-9.main(style='background-color: #f8f8f8; max-width: 73.7%;')
+            main
+                .row
+                    .col-lg-10
+                        div.deleteWindow
+                            h5 Are you sure to delete?
+                            div
+                                a(href="").btn.btn-primary Delete
+                                button(onclick='obj.deleteBtn(this)').btn.bg-white.float-right Cancel
+                    if articles !== undefined
+                        if edit === false && add === false
+                            form(action=`/admin/articles/page/${currentPage}` method="GET" class="form-inline" style=' min-width: 60%; margin:auto;margin-top: 20px;text-align:center;')
+                                .form-group
+                                    input.form-control(type="text" name="search" placeholder="Search for article by titile")
+                                .form-group
+                                    input.form-control.btn.bg-white(type="submit" value="Search" style='border: 1px solid silver;')
+                            .table-responsive
+                                table.table.table-striped.table-hover(style='text-align: center; margin-top: 50px; width: 1300px')
+                                    tr
+                                        th N.
+                                        th Image
+                                        th Title
+                                        th Content
+                                        th Keywords
+                                        th Date
+                                        th Views
+                                        th Category
+                                        th Visit
+                                        th Edit
+                                        th Delete
+                                    
+                                        
+                                        if (currentPage > totalPages || currentPage < 1)  && articles.length !== 0
+                                            h5 Page number is not valid
+                                            
+                                        else
+                                            each val, i in articles
+                                                tr
+                                                    td= (((currentPage*limit)-limit) + (i+1))
+                                                    td
+                                                        img(src= `/uploads/${val.image}` alt="image" style='height: 120px; width: 120px')
+                                                    td= val.title
+                                                    td= `${val.content}...`
+                                                    td= val.keywords
+                                                    td= ` ${new Date(val.date).getDate()}, ${new Date(val.date).getMonth()+1}, ${new Date(val.date).getFullYear()}`
+                                                    td= val.views
+                                                    each cat in categories
+                                                        
+                                                        if cat._id == val.category_id
+                                                            td= cat.name
+
+                                                    each sub in subCategories
+                                                        if sub._id == val.category_id
+                                                            td= sub.name
+                                                    td
+                                                        a(href=`/article/${val.num}`)
+                                                            i(class="fa fa-eye")
+                                                    td
+                                                        a(href=`/admin/articles/edit/${val._id}`)
+                                                            i.fa.fa-edit
+                                                    td
+                                                        i(onclick='obj.deleteBtn(this,"articles")' id=`${val._id}` style='cursor:pointer').fa.fa-trash-alt
+                                                    
+                    
+                    // pagination
+                    
+                    if totalPages > 2
+                        if currentPage > totalPages || currentPage < 1
+                            h5 Page number is not valid
+                            
+                        else
+
+                            div(class="pagenation")
+                                ul
+                                    
+                                    // displaying left arrow button
+                                    if currentPage > 5
+                                        li
+                                            a(href="/admin/articles/page/1") <<
+                                    // for current pages that less than 3 
+                                    if currentPage < 3
+                                        // three left buttons
+                                        - for(var i = 1; i<=3; i++)
+                                            if i <= totalPages 
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/articles/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/articles/page/${i}`)= i
+                                        // three right buttons
+                                        - for(var i = 4; i<6; i++)
+                                            if i <= totalPages
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/articles/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/articles/page/${i}`)= i
+                                    else
+                                        // three left buttons
+                                        - for(var i = currentPage-2; i<=currentPage; i++)
+                                            if i <= totalPages 
+                                            
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/articles/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/articles/page/${i}`)= i
+                                        // three right buttons
+                                        - for(var i = currentPage+1; i<=currentPage+3; i++)
+                                            if i <= totalPages
+                                                li
+                                                    if currentPage === i
+                                                        a(href=`/admin/articles/page/${i}` class="active")= i
+                                                    else
+                                                        a(href=`/admin/articles/page/${i}`)= i
+                                    // displaying right arrow button
+                                    if currentPage+6 < totalPages
+                                        li
+                                            a(href=`/admin/articles/page/${totalPages}`) >>
+
+                    if edit === false && add === false   
+                        .col-md-12
+                            a(href="/admin/articles/add" class='btn btn-primary' style='width: 70%; display: block; margin: 50px auto;')
+                                | Add Article 
+                                i(class="fa fa-plus")
+
+                    if error === undefined
+                        if  add === true   
+                            .col-md-10(style='margin: auto')
+                                form(action='/admin/articles/add' method='POST' style='text-align: center; width: 100%; margin-top: 20px;' enctype="multipart/form-data")
+                                    h4 Add Article
+                                    .form-group
+                                        input.form-control(type='text' placeholder='Title' required='' name='title')
+                                    
+                                    .form-group
+                                        select.form-control(name='category' required)
+                                            option(value='') - Select Category - 
+                                            - var found
+                                            each cat in categories
+                                                - found = 0
+                                                each sub in subCategories
+                                                    if JSON.stringify(cat._id) == JSON.stringify(sub.category_id)
+                                                        - found = 1  
+                                                if !found
+                                                    option(value=`${cat._id}`)= cat.name      
+                                            each sub in subCategories
+                                                    option(value=`${sub._id}`)= sub.name
+                                        
+                                    .form-group
+                                        div(style='text-align: left;')
+                                            input(type='file'  name='image' onchange="obj.imageUpload(this)" required)
+                                            img(src="" class= "imageShow" style="max-width: 200px; max-height: 200px;")
+
+                                    .form-group
+                                        input.form-control(type='text' required='' name='keywords' placeholder= 'keywords separated by ","')
+                                    
+                                    .form-group
+                                        textarea.form-control(id='editor' required='' name='content' placeholder='Contents')
+
+                                    .form-group
+                                        input.btn.btn-primary.form-control(type='submit' value='Add')
+                        if edit === true
+                            .col-md-8(style='margin: auto')
+                                form(action=`/admin/articles/edit/${editCollection[0]._id}` method='POST' style='text-align: center; width: 100%; margin-top: 20px;' enctype="multipart/form-data")
+                                    h4 Edit Article
+                                    .form-group
+                                        input.form-control(type='text' placeholder='Name' name='title' required='' id= `${editCollection[0]._id}` value= `${editCollection[0].title}`)
+                                    .form-group
+                                        select.form-control(name='category' required)
+                                            - var found
+                                            each cat in categories
+                                                - found = 0
+                                                each sub in subCategories
+                                                    
+                                                    if JSON.stringify(cat._id) == JSON.stringify(sub.category_id)
+                                                        - found = 1
+                                                        
+                                                if !found
+                                                    if JSON.stringify(cat._id) == JSON.stringify(editCollection[0].category_id)
+                                                        option(value=`${cat._id}` selected)= cat.name
+                                                    else
+                                                        option(value=`${cat._id}`)= cat.name
+                                                    
+                                            each sub in subCategories
+                                                if JSON.stringify(sub._id) == JSON.stringify(editCollection[0].category_id)
+                                                else 
+                                                    option(value=`${sub._id}` selected)= sub.name
+                                    .form-group
+                                        div(style='text-align: left;')
+                                            input(type='file'  name='image' onchange="obj.imageUpload(this)")
+                                            
+                                            img(src=`/uploads/${editCollection[0].image}` alt="image" class= "imageShow" style="max-width: 200px; max-height: 200px;")
+
+                                    .form-group
+                                        input.form-control(type='text' required='' name='keywords' placeholder= 'keywords separated by ","' value=`${editCollection[0].keywords}`)
+                                    
+                                    .form-group
+                                        textarea.form-control(id='editor' required='' name='content' placeholder='Contents')= editCollection[0].content
+
+                                    .form-group
+                                        input.btn.btn-primary.form-control(type='submit' value='Edit')
+                    
+                if error !== undefined
+                    h3(style='color:red;text-align:left')= error
+
+script(type='text/javascript' src='/scripts/admin/script.js')
+
+script(type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/js/froala_editor.pkgd.min.js')
+
+
+script. 
+    let editor = new FroalaEditor('#editor', {}, function () {
+        console.log(editor.html.get())
+    })
+

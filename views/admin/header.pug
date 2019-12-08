@@ -1,0 +1,26 @@
+head
+  title Admin Panel
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  meta(charset='utf-8')
+  link(rel='stylesheet' href='/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/icons/css/all.css')
+  link(rel='stylesheet' href='/css/admin.css')
+  link(href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.6/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css')
+.container
+    header
+        .row
+            .col-sm-3
+                h4  Admin Panel
+            .col-sm-7.ml-auto(style='text-align: right;')
+                span
+                  a(href='/admin/account')
+                    i.fa.fa-cog
+                    |  Account
+                span
+                    a(href='/' target="_blank")
+                      i.fa.fa-eye
+                      |  Visite Side
+                span
+                    a(href='/admin/logout')
+                      i.fa.fa-sign-out-alt
+                      |  Logout
