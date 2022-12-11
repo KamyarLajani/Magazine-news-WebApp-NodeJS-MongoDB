@@ -18,7 +18,7 @@
     "cookie-parser": "^1.4.4",
     "crypto": "^1.0.1",
     "email-verifier": "^0.4.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
     "express-validator": "^6.2.0",
